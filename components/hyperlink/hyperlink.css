@@ -1,0 +1,83 @@
+/* =============================================================================
+   HYPERLINK — Fabrik v1.3 (Figma node 4213:31728)
+
+   Inline text link. Variants: .hyperlink-primary (default) · .hyperlink-secondary
+   Sizes:    .hyperlink-sm (14px, default) · .hyperlink-lg (16px) · .hyperlink-xl (18px)
+   States:   :hover · :active · :focus-visible · a[aria-disabled="true"]
+   Static demo classes: .hyperlink-force-hover · -force-pressed · -force-focused
+
+   Markup:   <a class="hyperlink hyperlink-primary hyperlink-sm" href="…">Label</a>
+   Disabled: <a class="hyperlink …" aria-disabled="true" tabindex="-1">Label</a>
+   ============================================================================= */
+
+.hyperlink {
+  font-family:    var(--font-sans);
+  font-size:      var(--text-body-sm);     /* Figma: body/regular/small */
+  line-height:    var(--lh-body-sm);
+  font-weight:    var(--font-light);
+  color:          var(--color-primary);
+  border-radius:  var(--radius-default);
+  cursor:         pointer;
+
+  /* Underline always on, drawn in the text colour, sized by the font itself */
+  text-decoration:          underline;
+  text-decoration-style:    solid;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+  text-underline-position:  from-font;
+  text-underline-offset:    auto;
+}
+
+
+/* VARIANTS */
+.hyperlink-primary   { color: var(--color-primary); }
+.hyperlink-secondary { color: var(--color-link-secondary); }
+
+
+/* SIZES — -sm = body/regular/small (14px), -lg = body/regular/medium (16px),
+   -xl = body/regular/large (18px, not yet in the Figma component) */
+.hyperlink-sm {
+  font-size:   var(--text-body-sm);        /* Figma: body/regular/small */
+  line-height: var(--lh-body-sm);
+}
+
+.hyperlink-lg {
+  font-size:   var(--text-body-md);        /* Figma: body/regular/medium */
+  line-height: var(--lh-body-md);
+}
+
+.hyperlink-xl {
+  font-size:   var(--text-body-lg);
+  line-height: var(--lh-body-lg);
+}
+
+
+/* HOVER · FOCUSED · PRESSED — identical colours for both variants */
+.hyperlink:hover,
+.hyperlink-force-hover,
+.hyperlink:focus-visible,
+.hyperlink-force-focused {
+  color: var(--color-primary-hover);
+}
+
+.hyperlink:active,
+.hyperlink-force-pressed {
+  color: var(--color-primary-pressed);
+}
+
+
+/* FOCUS RING — keyboard only. Figma: 4px stroke outside a 2px gap, so the
+   offset is tighter than the shared --focus-ring-offset (intentional exception). */
+.hyperlink:focus-visible,
+.hyperlink-force-focused {
+  outline:        var(--focus-ring-width) solid var(--color-stroke-focus);
+  outline-offset: var(--space-xxs);
+}
+
+
+/* DISABLED — links have no disabled attribute; pair with tabindex="-1" in markup */
+.hyperlink[aria-disabled="true"] {
+  color:          var(--color-on-surface-disabled);
+  cursor:         default;
+  pointer-events: none;
+}

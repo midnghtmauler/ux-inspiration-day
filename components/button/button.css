@@ -1,0 +1,599 @@
+/* =============================================================================
+   Fabrik Button Component — button.css  v4
+   Requires: ../../tokens.css
+
+   VARIANTS
+   .btn-primary-filled      Primary / Filled     rect  magenta fill
+   .btn-primary-plain       Primary / Plain      plain magenta text + underline hover
+   .btn-secondary-outline   Secondary / Outline  rect  magenta border
+   .btn-secondary-plain     Secondary / Plain    plain dark text + underline hover
+   .btn-secondary-plain-inverse  modifier on Secondary / Plain: light text for dark surfaces
+   .btn-tertiary-tonal      Tertiary / Tonal     rect  neutral fill
+   .btn-tertiary-outline    Tertiary / Outline   rect  neutral border
+   .btn-tertiary-plain-sm   Tertiary / Plain     plain dark text, 16px icons, S default
+
+   SIZE MODIFIERS (rectangle + icon-only)
+   .btn-size-m   .btn-size-s
+
+   ICON POSITION MODIFIERS
+   .btn-icon-left   .btn-icon-right   .btn-icon-only
+
+   STATE CLASSES (for showcase / JS-driven states)
+   .is-hovered  .is-focused  .is-pressed  .is-disabled  .is-loading
+
+   HTML STRUCTURE
+   <button class="btn btn-primary-filled [btn-icon-left]">
+     <svg class="btn-icon-el">…</svg>          ← optional; use 16px icons for tertiary-plain-sm
+     <span class="btn-label">Label</span>
+     <span class="btn-spinner" aria-hidden="true"></span>
+   </button>
+   ============================================================================= */
+
+
+/* =============================================================================
+   SPINNER ANIMATION
+   ============================================================================= */
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-spinner {
+  display:          none;        /* shown only via .is-loading */
+  position:         absolute;    /* centered independently of label/icon layout */
+  inset:            0;
+  margin:           auto;
+  flex-shrink:      0;
+  width:            16px;
+  height:           16px;
+  border:           var(--stroke-thick) solid currentColor;
+  border-top-color: transparent;
+  border-radius:    50%;
+  animation:        btn-spin 0.8s linear infinite;
+  pointer-events:   none;
+}
+
+
+/* =============================================================================
+   BASE
+   ============================================================================= */
+.btn {
+  position:             relative;   /* anchors the absolutely-centered loading spinner */
+  display:              inline-flex;
+  align-items:          center;
+  justify-content:      center;
+  gap:                  var(--space-xs);
+  padding:              var(--space-sm) var(--space-ml);  /* L default for rect variants */
+  border-radius:        var(--radius-default);
+  font-family:          var(--font-sans);
+  font-size:            var(--text-label-lg); /* 16px */
+  font-weight:          var(--font-bold);     /* 700 */
+  line-height:          var(--lh-label-lg);   /* 24px */
+  letter-spacing:       0;
+  white-space:          nowrap;
+  cursor:               pointer;
+  border:               none;
+  text-decoration:      none;
+  user-select:          none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The transition lives only on interaction states so that buttons do not animate from their
+   initial style on page load (visible flash in Safari). Trade-off: leaving these states is instant. */
+.btn:hover,
+.btn:active,
+.btn:focus-visible {
+  transition:
+    background-color 0.15s ease,
+    color            0.15s ease,
+    border-color     0.15s ease,
+    text-decoration  0.15s ease;
+}
+
+/* 24px icons by default */
+.btn svg,
+.btn .btn-icon-el {
+  width:       24px;
+  height:      24px;
+  flex-shrink: 0;
+  display:     block;
+  fill:        currentColor;
+}
+
+
+/* =============================================================================
+   FOCUS RING
+   Keyboard focus only: utilities/fabrik-dropdown.js sets data-input-modality="pointer" on <html>
+   after any mouse, touch or pen interaction, and the :focus-visible ring is off while it is set.
+   :where() keeps the old specificity (0,2,0); without the attribute nothing changes.
+   While it is set the ring is off completely: without the outline: none rule below the
+   browser's own default :focus-visible ring would show in its place.
+   ============================================================================= */
+:where(html[data-input-modality="pointer"]) .btn:focus-visible {
+  outline: none;
+}
+
+:where(html:not([data-input-modality="pointer"])) .btn:focus-visible,
+.btn.is-focused {
+  outline:        var(--focus-ring-width) solid var(--color-stroke-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Plain variants: tighter focus ring */
+:where(html:not([data-input-modality="pointer"])) .btn-primary-plain:focus-visible,
+.btn-primary-plain.is-focused,
+:where(html:not([data-input-modality="pointer"])) .btn-secondary-plain:focus-visible,
+.btn-secondary-plain.is-focused,
+:where(html:not([data-input-modality="pointer"])) .btn-tertiary-plain-sm:focus-visible,
+.btn-tertiary-plain-sm.is-focused {
+  outline-offset: var(--space-xxs);
+}
+
+
+/* =============================================================================
+   DISABLED — RECTANGLE VARIANTS
+   (primary-filled, secondary-outline, tertiary-tonal, tertiary-outline)
+   Padding never changes for disabled — outline's border lives on ::before,
+   so it never consumed layout space and needs no compensation here.
+   ============================================================================= */
+.btn-primary-filled.is-disabled,
+.btn-primary-filled:disabled,
+.btn-secondary-outline.is-disabled,
+.btn-secondary-outline:disabled,
+.btn-tertiary-tonal.is-disabled,
+.btn-tertiary-tonal:disabled,
+.btn-tertiary-outline.is-disabled,
+.btn-tertiary-outline:disabled {
+  background-color: var(--color-surface-disabled) !important;
+  color:            var(--color-on-surface-disabled) !important;
+  cursor:           not-allowed;
+  pointer-events:   none;
+  outline:          none !important;
+}
+
+/* Outline variants: hide the ::before border while disabled */
+.btn-secondary-outline.is-disabled::before,
+.btn-secondary-outline:disabled::before,
+.btn-tertiary-outline.is-disabled::before,
+.btn-tertiary-outline:disabled::before {
+  display: none;
+}
+
+
+/* =============================================================================
+   DISABLED — PLAIN VARIANTS
+   (primary-plain, secondary-plain, tertiary-plain-sm)
+   Transparent background, no underline, muted text.
+   ============================================================================= */
+.btn-primary-plain.is-disabled,
+.btn-primary-plain:disabled,
+.btn-secondary-plain.is-disabled,
+.btn-secondary-plain:disabled,
+.btn-tertiary-plain-sm.is-disabled,
+.btn-tertiary-plain-sm:disabled {
+  background-color: transparent !important;
+  color:            var(--color-on-surface-disabled) !important;
+  border:           none !important;
+  text-decoration:  none !important;
+  cursor:           not-allowed;
+  pointer-events:   none;
+  outline:          none !important;
+}
+
+
+/* =============================================================================
+   LOADING — SHARED
+   ============================================================================= */
+.btn.is-loading {
+  cursor:         wait;
+  pointer-events: none;
+}
+
+.btn.is-loading .btn-label,
+.btn.is-loading .btn-icon-el,
+.btn.is-loading svg:not(.btn-spinner) {
+  visibility: hidden;   /* keeps layout size; display:none would shrink the button */
+}
+
+.btn.is-loading .btn-spinner {
+  display: block;
+}
+
+
+/* LOADING GROUP A — Grey background (looks like disabled)
+   primary-filled · tertiary-tonal · tertiary-outline
+   ---------------------------------------------------------------- */
+.btn-primary-filled.is-loading,
+.btn-tertiary-tonal.is-loading,
+.btn-tertiary-outline.is-loading {
+  background-color: var(--color-surface-disabled);
+  color:            var(--color-on-surface-disabled);
+}
+
+/* Outline: hide the ::before border while loading (grey background only) */
+.btn-tertiary-outline.is-loading::before {
+  display: none;
+}
+
+
+/* LOADING GROUP B — Transparent background, magenta spinner
+   primary-plain · secondary-outline · secondary-plain
+   ---------------------------------------------------------------- */
+.btn-primary-plain.is-loading,
+.btn-secondary-plain.is-loading {
+  background-color: transparent;
+  color:            var(--color-primary);
+}
+
+.btn-secondary-outline.is-loading {
+  background-color: transparent;
+  color:            var(--color-primary);
+}
+
+/* Outline: recolor the ::before border, keep it visible while loading */
+.btn-secondary-outline.is-loading::before {
+  border-color: var(--color-stroke-medium);
+}
+
+
+/* LOADING GROUP C — Tertiary plain small (transparent bg, magenta, 16px spinner)
+   ---------------------------------------------------------------- */
+.btn-tertiary-plain-sm.is-loading {
+  background-color: transparent;
+  color:            var(--color-primary);
+}
+
+
+/* =============================================================================
+   RECTANGLE BUTTON SIZE MODIFIERS
+   Applies to: primary-filled, secondary-outline
+   Tertiary has no size variants (Figma). Sizes L/M/S apply to primary and
+   secondary only.
+   Default = L (var(--space-sm) / var(--space-ml) / icon-side var(--space-m) / gap var(--space-xs))
+   Outline's border lives on ::before, so its padding is identical to the
+   filled equivalent — no ±1px border compensation needed.
+   ============================================================================= */
+
+/* ── Medium ────────────────────────────────────────────────────── */
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-m {
+  padding:   var(--space-s) var(--space-m);
+  gap:       var(--space-xs);
+  font-size: var(--text-label-lg);
+}
+
+/* ── Small ─────────────────────────────────────────────────────── */
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-s {
+  padding:   var(--space-xs) var(--space-s);
+  gap:       var(--space-xxs);
+  font-size: var(--text-label-md);   /* 14px */
+}
+
+/* S size: 16px icons for filled/outline rect variants */
+:is(.btn-primary-filled,
+    .btn-secondary-outline).btn-size-s svg,
+:is(.btn-primary-filled,
+    .btn-secondary-outline).btn-size-s .btn-icon-el {
+  width:  16px;
+  height: 16px;
+}
+
+
+/* =============================================================================
+   ICON POSITION ADJUSTMENTS — RECTANGLE BUTTONS
+   btn-icon-left  reduces the icon side (left) padding
+   btn-icon-right reduces the icon side (right) padding
+   Outline shares the same values as filled/tonal — border is on ::before.
+   ============================================================================= */
+
+/* ── L: icon-side = var(--space-m) — tonal/outline share this; plain-sm has no left/right padding at all ── */
+:is(.btn-primary-filled, .btn-secondary-outline, .btn-tertiary-tonal, .btn-tertiary-outline).btn-icon-left  { padding-left:  var(--space-m); }
+:is(.btn-primary-filled, .btn-secondary-outline, .btn-tertiary-tonal, .btn-tertiary-outline).btn-icon-right { padding-right: var(--space-m); }
+
+/* ── M: icon-side = var(--space-sm) — primary/secondary only, tertiary has no size variants ── */
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-m.btn-icon-left  { padding-left:  var(--space-sm); }
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-m.btn-icon-right { padding-right: var(--space-sm); }
+
+/* ── S: icon-side = var(--space-xs) — primary/secondary only, tertiary has no size variants ── */
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-s.btn-icon-left  { padding-left:  var(--space-xs); }
+:is(.btn-primary-filled, .btn-secondary-outline).btn-size-s.btn-icon-right { padding-right: var(--space-xs); }
+
+
+/* =============================================================================
+   ICON POSITION ADJUSTMENTS — PLAIN BUTTONS
+   icon-side = var(--space-xs) at all sizes
+   Tertiary plain has no left/right padding at all — see TERTIARY PLAIN
+   PADDING OVERRIDE below, so it needs no icon-position rule here.
+   ============================================================================= */
+:is(.btn-primary-plain, .btn-secondary-plain).btn-icon-left  { padding-left:  var(--space-xs); }
+:is(.btn-primary-plain, .btn-secondary-plain).btn-icon-right { padding-right: var(--space-xs); }
+
+
+/* =============================================================================
+   TERTIARY PLAIN PADDING OVERRIDE
+   Plain has no left/right padding at all — hugs its icon+label content
+   horizontally, regardless of icon position (leading/trailing/none). Only
+   var(--space-xxs) top/bottom remains. Tonal/outline keep the base .btn
+   padding (var(--space-sm) var(--space-ml)) — no override needed for them.
+   Tertiary has no icon-only variant, so no icon-only case here.
+   ============================================================================= */
+:is(.btn-tertiary-plain-sm) {
+  padding-top:    var(--space-xxs);
+  padding-bottom: var(--space-xxs);
+  padding-left:   0;
+  padding-right:  0;
+}
+
+
+/* =============================================================================
+   ICON-ONLY SIZES
+   Rect variants (filled/outline/tonal): padding + icon size derives the exact
+   box (var(--space-sm)+24+var(--space-sm)=48, var(--space-s)+24+var(--space-s)=40,
+   var(--space-s)+16+var(--space-s)=32) — outline no longer needs border
+   compensation since its border lives on ::before.
+   Plain variants keep an explicit width/height: their own padding
+   (var(--space-s)) plus a 24px icon only adds up to 40px, not the required
+   48px footprint, so the size can't be derived from padding alone here.
+   ============================================================================= */
+.btn.btn-icon-only {
+  gap:     0;
+  padding: var(--space-sm);
+  width:   48px;
+  height:  48px;
+}
+
+.btn.btn-icon-only.btn-size-m { padding: var(--space-s); width: 40px; height: 40px; }
+
+.btn.btn-icon-only.btn-size-s { padding: var(--space-s); width: 32px; height: 32px; }
+
+/* S icon-only: 16px icon */
+.btn.btn-icon-only.btn-size-s svg,
+.btn.btn-icon-only.btn-size-s .btn-icon-el {
+  width:  16px;
+  height: 16px;
+}
+
+/* Plain icon-only: fixed 48×48 footprint — see note above */
+:is(.btn-primary-plain, .btn-secondary-plain).btn-icon-only { padding: var(--space-s); }
+.btn-tertiary-plain-sm.btn-icon-only                         { padding: var(--space-s); }
+
+
+/* =============================================================================
+   VARIANT: PRIMARY / FILLED
+   ============================================================================= */
+.btn-primary-filled {
+  background-color: var(--color-primary);
+  color:            var(--color-on-primary);
+}
+
+.btn-primary-filled:hover,
+.btn-primary-filled.is-hovered { background-color: var(--color-primary-hover); }
+
+.btn-primary-filled:active,
+.btn-primary-filled.is-pressed { background-color: var(--color-primary-pressed); }
+
+
+/* =============================================================================
+   VARIANT: PRIMARY / PLAIN
+   Underline on hover/pressed (2px thick, 6px offset), no background change.
+   ============================================================================= */
+.btn-primary-plain {
+  background-color: transparent;
+  color:            var(--color-primary);
+  padding:          var(--space-s);            /* L/M: var(--space-s) all sides */
+  gap:              var(--space-xs);
+}
+
+.btn-primary-plain.btn-size-s {
+  padding: var(--space-xs) var(--space-s);
+  gap:     var(--space-xxs);
+}
+
+.btn-primary-plain:hover .btn-label,
+.btn-primary-plain.is-hovered .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thick);
+  text-underline-offset:     var(--underline-offset-plain);
+}
+
+.btn-primary-plain:active,
+.btn-primary-plain.is-pressed { color: var(--color-primary-pressed); }
+
+.btn-primary-plain:active .btn-label,
+.btn-primary-plain.is-pressed .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thick);
+  text-underline-offset:     var(--underline-offset-plain);
+}
+
+
+/* =============================================================================
+   VARIANT: SECONDARY / OUTLINE
+   Magenta border + text. Hover/pressed add a magenta tint background.
+   Border lives on ::before (absolutely positioned overlay) so it never
+   consumes layout space — padding matches the filled equivalent exactly.
+   ============================================================================= */
+.btn-secondary-outline {
+  position:          relative;
+  background-color:  transparent;
+  color:             var(--color-primary);
+}
+
+.btn-secondary-outline::before {
+  content:        '';
+  position:       absolute;
+  inset:          0;
+  border:         var(--stroke-thin) solid var(--color-primary);
+  border-radius:  inherit;
+  pointer-events: none;
+}
+
+.btn-secondary-outline:hover,
+.btn-secondary-outline.is-hovered {
+  background-color: var(--color-outlined-primary-hover);
+}
+
+.btn-secondary-outline:active,
+.btn-secondary-outline.is-pressed {
+  background-color: var(--color-outlined-primary-pressed);
+}
+
+
+/* =============================================================================
+   VARIANT: SECONDARY / PLAIN
+   Dark text (--color-on-surface), not magenta. Underline on hover (2px, 6px offset).
+   ============================================================================= */
+.btn-secondary-plain {
+  background-color: transparent;
+  color:            var(--color-on-surface);
+  padding:          var(--space-s);
+  gap:              var(--space-xs);
+}
+
+.btn-secondary-plain.btn-size-s {
+  padding: var(--space-xs) var(--space-s);
+  gap:     var(--space-xxs);
+}
+
+.btn-secondary-plain:hover .btn-label,
+.btn-secondary-plain.is-hovered .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thick);
+  text-underline-offset:     var(--underline-offset-plain);
+}
+
+.btn-secondary-plain:active .btn-label,
+.btn-secondary-plain.is-pressed .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thick);
+  text-underline-offset:     var(--underline-offset-plain);
+}
+
+/* Inverse modifier — pair with .btn-secondary-plain: <button class="btn btn-secondary-plain btn-secondary-plain-inverse">.
+   Only the label/icon color changes (light text on a dark surface, e.g. the Tooltip's "Got it");
+   padding, font, underline hover/pressed, focus ring, disabled and loading all come from .btn-secondary-plain.
+   Text and icon+text only — icon-only hover uses a light tint that does not belong on a dark surface. */
+.btn-secondary-plain-inverse {
+  color: var(--color-on-surface-inverse);
+}
+
+
+/* =============================================================================
+   PLAIN BUTTON — ICON-ONLY HOVER/PRESSED OVERRIDE
+   Text variants use underline-only hover (no background).
+   Icon-only variants have no label to underline, so a background fill is used
+   instead — matching the Figma spec (outlined-primary / outlined-neutral tokens).
+   These rules must come AFTER the base plain variant rules to win specificity.
+   ============================================================================= */
+
+/* Primary / Plain — icon-only: magenta tint on hover/pressed */
+.btn-primary-plain.btn-icon-only:hover,
+.btn-primary-plain.btn-icon-only.is-hovered {
+  background-color: var(--color-outlined-primary-hover);
+}
+
+.btn-primary-plain.btn-icon-only:active,
+.btn-primary-plain.btn-icon-only.is-pressed {
+  background-color: var(--color-outlined-primary-pressed);
+  color:            var(--color-primary);   /* keep icon magenta; undo pressed color shift */
+}
+
+/* Secondary / Plain — icon-only: neutral tint on hover/pressed */
+.btn-secondary-plain.btn-icon-only:hover,
+.btn-secondary-plain.btn-icon-only.is-hovered {
+  background-color: var(--color-outlined-neutral-hover);
+}
+
+.btn-secondary-plain.btn-icon-only:active,
+.btn-secondary-plain.btn-icon-only.is-pressed {
+  background-color: var(--color-outlined-neutral-pressed);
+}
+
+
+/* =============================================================================
+   VARIANT: TERTIARY / TONAL
+   Tertiary has no size variants (Figma). Sizes L/M/S apply to primary and
+   secondary only.
+   ============================================================================= */
+.btn-tertiary-tonal {
+  background-color: var(--color-tonal-enabled);
+  color:            var(--color-on-surface);
+}
+
+.btn-tertiary-tonal:hover,
+.btn-tertiary-tonal.is-hovered { background-color: var(--color-tonal-hover); }
+
+.btn-tertiary-tonal:active,
+.btn-tertiary-tonal.is-pressed { background-color: var(--color-tonal-pressed); }
+
+
+/* =============================================================================
+   VARIANT: TERTIARY / OUTLINE
+   Neutral border (--color-stroke-medium = neutral/80), dark text.
+   Border lives on ::before (absolutely positioned overlay) so it never
+   consumes layout space — padding matches the tonal equivalent exactly.
+   ============================================================================= */
+.btn-tertiary-outline {
+  position:          relative;
+  background-color:  transparent;
+  color:             var(--color-on-surface);
+}
+
+.btn-tertiary-outline::before {
+  content:        '';
+  position:       absolute;
+  inset:          0;
+  border:         var(--stroke-thin) solid var(--color-stroke-medium);
+  border-radius:  inherit;
+  pointer-events: none;
+}
+
+.btn-tertiary-outline:hover,
+.btn-tertiary-outline.is-hovered { background-color: var(--color-tonal-enabled); }
+
+.btn-tertiary-outline:active,
+.btn-tertiary-outline.is-pressed { background-color: var(--color-tonal-hover); }
+
+
+/* =============================================================================
+   VARIANT: TERTIARY / PLAIN SMALL
+   Dark text default, changes to magenta on hover/pressed.
+   Regular weight, 16px icons (../icons/16/). No left/right padding (see
+   TERTIARY PLAIN PADDING OVERRIDE) — hugs its icon+label content horizontally.
+   Underline on hover/pressed (auto thickness/offset), no background change.
+   ============================================================================= */
+.btn-tertiary-plain-sm {
+  background-color: transparent;
+  color:            var(--color-on-surface);
+  gap:              var(--space-xs);
+  font-weight:      var(--font-regular);
+}
+
+/* 16px icons for this variant */
+.btn-tertiary-plain-sm svg,
+.btn-tertiary-plain-sm .btn-icon-el {
+  width:  16px;
+  height: 16px;
+}
+
+.btn-tertiary-plain-sm:hover,
+.btn-tertiary-plain-sm.is-hovered {
+  color: var(--color-primary);
+}
+
+.btn-tertiary-plain-sm:hover .btn-label,
+.btn-tertiary-plain-sm.is-hovered .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thin);
+  text-underline-offset:     var(--underline-offset-plain-small);
+}
+
+.btn-tertiary-plain-sm:active,
+.btn-tertiary-plain-sm.is-pressed {
+  color: var(--color-primary);
+}
+
+.btn-tertiary-plain-sm:active .btn-label,
+.btn-tertiary-plain-sm.is-pressed .btn-label {
+  text-decoration:           underline;
+  text-decoration-thickness: var(--stroke-thin);
+  text-underline-offset:     var(--underline-offset-plain-small);
+}

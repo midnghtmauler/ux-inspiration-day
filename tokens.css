@@ -1,0 +1,632 @@
+/* ==========================================================================
+   Fabrik Design System — CSS Tokens
+   For use in HTML/CSS/JS prototypes only. Not for production.
+   Source: Fabrik v1.3 / eh-tailwind token system
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   E+H Sans
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansLig.woff2') format('woff2'),
+       url('fonts/E+H_SansLig.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansLigIta.woff2') format('woff2'),
+       url('fonts/E+H_SansLigIta.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansReg.woff2') format('woff2'),
+       url('fonts/E+H_SansReg.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansRegIta.woff2') format('woff2'),
+       url('fonts/E+H_SansRegIta.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansDem.woff2') format('woff2'),
+       url('fonts/E+H_SansDem.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansDemIta.woff2') format('woff2'),
+       url('fonts/E+H_SansDemIta.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansBol.woff2') format('woff2'),
+       url('fonts/E+H_SansBol.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Sans';
+  src: url('fonts/E+H_SansBolIta.woff2') format('woff2'),
+       url('fonts/E+H_SansBolIta.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   E+H Serif
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifLig.woff2') format('woff2'),
+       url('fonts/E+H_SerifLig.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifLigIta.woff2') format('woff2'),
+       url('fonts/E+H_SerifLigIta.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifReg.woff2') format('woff2'),
+       url('fonts/E+H_SerifReg.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifRegIta.woff2') format('woff2'),
+       url('fonts/E+H_SerifRegIta.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifDem.woff2') format('woff2'),
+       url('fonts/E+H_SerifDem.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifDemIta.woff2') format('woff2'),
+       url('fonts/E+H_SerifDemIta.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifBol.woff2') format('woff2'),
+       url('fonts/E+H_SerifBol.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'E+H Serif';
+  src: url('fonts/E+H_SerifBolIta.woff2') format('woff2'),
+       url('fonts/E+H_SerifBolIta.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+
+  /* --------------------------------------------------------------------------
+     Primitive palette (reference only — use semantic tokens in components)
+     Source: Fabrik v1.3 color ramps
+     -------------------------------------------------------------------------- */
+
+  /* Magenta */
+  --magenta-10: #3E0021;
+  --magenta-20: #640036;
+  --magenta-30: #850048;
+  --magenta-40: #A8005C;
+  --magenta-50: #E5007D;
+  --magenta-60: #EF61AE;
+  --magenta-70: #F491C7;
+  --magenta-80: #F8BADC;
+  --magenta-90: #FCDDEE;
+  --magenta-95: #FDF0F7;
+  --magenta-99: #FEF8FC;
+
+  /* Cyan */
+  --cyan-10: #121D25;
+  --cyan-20: #193345;
+  --cyan-30: #1D4661;
+  --cyan-40: #1D5A7E;
+  --cyan-50: #177DB2;
+  --cyan-60: #009EE3;
+  --cyan-70: #74B7EB;
+  --cyan-80: #ABD0F2;
+  --cyan-90: #D6E7F9;
+  --cyan-95: #EDF4FC;
+  --cyan-99: #F7FAFE;
+
+  /* Neutral */
+  --neutral-10: #161C1F;
+  --neutral-20: #273237;
+  --neutral-30: #36444C;
+  --neutral-40: #455861;
+  --neutral-50: #667983;
+  --neutral-60: #8797A3;
+  --neutral-70: #A4B3BC;
+  --neutral-80: #C2CED5;
+  --neutral-90: #DFE6EA;
+  --neutral-95: #F0F4F6;
+  --neutral-99: #F8FAFB;
+
+  /* Red */
+  --red-10: #2F140C;
+  --red-20: #571D13;
+  --red-30: #7A2416;
+  --red-40: #9E2B19;
+  --red-50: #DE361B;
+  --red-60: #F56947;
+  --red-70: #FF9475;
+  --red-80: #FFBCA6;
+  --red-90: #FFDED2;
+  --red-95: #FFF1EB;
+  --red-99: #FFF9F6;
+
+  /* Yellow */
+  --yellow-10: #382400;
+  --yellow-20: #563000;
+  --yellow-30: #784E00;
+  --yellow-40: #A36400;
+  --yellow-50: #D98D00;
+  --yellow-60: #F4AF1C;
+  --yellow-70: #FFC847;
+  --yellow-80: #FFD574;
+  --yellow-90: #FFEBAC;
+  --yellow-95: #FFF3C7;
+  --yellow-99: #FFFAE6;
+
+  /* Green */
+  --green-10: #101F09;
+  --green-20: #1B3710;
+  --green-30: #254B16;
+  --green-40: #30601C;
+  --green-50: #428527;
+  --green-60: #53A831;
+  --green-70: #82C069;
+  --green-80: #B0D79F;
+  --green-90: #D7EBCF;
+  --green-95: #EDF6EA;
+  --green-99: #F7FBF6;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — PRIMARY
+     Source: color/primary variables
+     primary = magenta/40
+     -------------------------------------------------------------------------- */
+
+  --color-primary:            var(--magenta-40);
+  --color-on-primary:         var(--white);
+  --color-primary-inverse:    var(--white);
+  --color-on-primary-inverse: var(--magenta-40);
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — STATES
+     Source: color/states variables
+     -------------------------------------------------------------------------- */
+
+  --color-primary-hover:              var(--magenta-20);   /* #640036 */
+  --color-primary-pressed:            var(--magenta-10);   /* #3E0021 */
+  --color-outlined-primary-hover:     var(--magenta-90);
+  --color-outlined-primary-pressed:   var(--magenta-80);
+  --color-outlined-neutral-hover:     var(--neutral-90);
+  --color-outlined-neutral-pressed:   var(--neutral-80);
+  --color-tonal-enabled:              var(--neutral-90);
+  --color-tonal-hover:                var(--neutral-80);
+  --color-tonal-pressed:              var(--neutral-70);
+  --color-surface-hover:              var(--neutral-90);
+  --color-surface-pressed:            var(--neutral-80);
+  --color-surface-disabled:           var(--neutral-95);
+  --color-surface-hover-inverse:      rgba(255, 255, 255, 0.2);
+  --color-surface-pressed-inverse:    rgba(255, 255, 255, 0.3);
+  --color-info-hover:                 var(--cyan-80);
+  --color-info-pressed:               var(--cyan-70);
+  --color-success-hover:              var(--green-80);
+  --color-success-pressed:            var(--green-70);
+  --color-warning-hover:              var(--yellow-80);
+  --color-warning-pressed:            var(--yellow-70);
+  --color-error-hover:                var(--red-80);
+  --color-error-pressed:              var(--red-70);
+  --color-table-error-bg:             var(--red-99);
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — SURFACE
+     Source: color/surface variables
+     -------------------------------------------------------------------------- */
+
+  --color-surface:                  var(--white);
+  --color-surface-variant-1:        var(--neutral-99);
+  --color-surface-variant-2:        var(--neutral-95);
+  --color-surface-inverse:          var(--neutral-10);
+  --color-surface-variant-inverse:  var(--neutral-20);
+  --color-surface-info:             var(--cyan-90);
+  --color-surface-success:          var(--green-90);
+  --color-surface-warning:          var(--yellow-90);
+  --color-surface-error:            var(--red-90);
+  --color-surface-promo:            var(--cyan-95);
+  --color-surface-scrim:            rgba(18, 29, 37, 0.40);
+  --color-thumbnail-backdrop:       rgba(18, 29, 37, 0.70);
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — ON-SURFACE (text)
+     Source: color/on-surface variables
+     -------------------------------------------------------------------------- */
+
+  --color-on-surface:                 var(--neutral-20);
+  --color-on-surface-variant:         var(--neutral-50);
+  --color-on-surface-inverse:         var(--white);
+  --color-on-surface-inverse-variant: var(--neutral-70);
+  --color-on-surface-disabled:        var(--neutral-60);
+  --color-link-secondary:             var(--neutral-40);   /* Figma: color/neutral/40 — Hyperlink Secondary, enabled */
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — STROKE
+     Source: color/stroke variables
+     -------------------------------------------------------------------------- */
+
+  --color-stroke-strong:    var(--neutral-20);
+  --color-stroke-medium:    var(--neutral-80);
+  --color-stroke-soft:      var(--neutral-90);
+  --color-stroke-white:     var(--white);
+  --color-stroke-primary:   var(--color-primary);
+  --color-stroke-focus:     var(--magenta-50);
+  --focus-ring-width:       4px;   /* standard keyboard-focus outline width, all interactive elements */
+  --focus-ring-offset:      4px;   /* standard keyboard-focus outline offset, all interactive elements */
+  --color-stroke-error:     var(--red-50);
+  --color-stroke-info:      var(--cyan-80);
+  --color-stroke-success:   var(--green-80);
+  --color-stroke-warning:   var(--yellow-80);
+  --color-stroke-negative:  var(--red-80);
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — ALERTS
+     Source: color/alerts variables
+     -------------------------------------------------------------------------- */
+
+  --color-alert-success:  var(--green-50);
+  --color-alert-warning:  var(--yellow-50);
+  --color-alert-error:    var(--red-50);
+  --color-alert-neutral:  var(--cyan-50);
+
+
+  /* --------------------------------------------------------------------------
+     Semantic colors — APPLICATION ONLY (sidebar)
+     Source: color/application only variables
+     -------------------------------------------------------------------------- */
+
+  --color-sidebar-enabled:  var(--cyan-40);
+  --color-sidebar-hover:    var(--cyan-30);
+  --color-sidebar-active:   var(--cyan-20);
+
+  --color-namur-green:      var(--green-70);
+  --color-namur-yellow:     var(--yellow-70);
+  --color-namur-red:        var(--red-50);
+  --color-namur-undefined:  var(--neutral-80);
+  --color-namur-orange:     #fd8e4d;
+  --color-namur-blue:       var(--cyan-70);
+
+  --color-chart-1:          var(--neutral-20);
+  --color-chart-2:          var(--cyan-60);
+  --color-chart-3:          var(--yellow-60);
+  --color-chart-4:          var(--green-60);
+  --color-chart-5:          var(--magenta-50);
+
+
+  /* --------------------------------------------------------------------------
+     Shadow color
+     Source: color/shadow = color/cyan/20
+     -------------------------------------------------------------------------- */
+
+  --color-shadow: var(--cyan-20);
+
+
+  /* --------------------------------------------------------------------------
+     Spacing
+     -------------------------------------------------------------------------- */
+
+  --space-none:   0px;
+  --space-xxxs:   1px;
+  --space-xxs:    2px;
+  --space-xs:     4px;
+  --space-s:      8px;
+  --space-sm:     12px;
+  --space-m:      16px;   /* base unit */
+  --space-ml:     24px;
+  --space-l:      32px;
+  --space-xl:     48px;
+  --space-xxl:    64px;
+  --space-xxxl:   80px;   /* Figma: spacing/spacing-3xl */
+
+
+  /* --------------------------------------------------------------------------
+     Border radius
+     -------------------------------------------------------------------------- */
+
+  --radius-none:    0px;
+  --radius-default: 2px;
+  --radius-round:   128px;   /* pills, chips, tags, badges */
+
+
+  /* --------------------------------------------------------------------------
+     Stroke widths
+     Source: 02 Breakpoints / stroke
+     -------------------------------------------------------------------------- */
+
+  --stroke-thin:   1px;   /* stroke/thin-stroke */
+  --stroke-thick:  2px;   /* stroke/thick-stroke */
+  /* stroke/focus-stroke (4px) is not duplicated here — it's already --focus-ring-width above */
+
+  /* Underline offset of the plain buttons on hover and pressed (-plain for Primary and Secondary Plain,
+     -plain-small for Tertiary Plain small). It is a Figma text property with no Figma variable;
+     values confirmed by the design owner. */
+  --underline-offset-plain:       6px;
+  --underline-offset-plain-small: 3px;
+
+
+  /* --------------------------------------------------------------------------
+     Input spacing
+     Source: 03 UI Size / inputs
+     -------------------------------------------------------------------------- */
+
+  --input-spacing-y: 10px;  /* inputs/spacing-y, UI Size "Large" mode — aliases a legacy variable;
+                                Medium (6px) and Small (2px) exist in Figma but aren't built here.
+                                Confirm this value with the design system owner. */
+
+
+  /* --------------------------------------------------------------------------
+     Typography — Font families
+     -------------------------------------------------------------------------- */
+
+  --font-sans:   'E+H Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif:  'E+H Serif', Georgia, serif;
+
+
+  /* --------------------------------------------------------------------------
+     Typography — Font weights
+     -------------------------------------------------------------------------- */
+
+  --font-light:    300;
+  --font-regular:  400;
+  --font-demi:     600;
+  --font-bold:     700;
+
+
+  /* --------------------------------------------------------------------------
+     Typography — Font size / line-height scale
+     Source: Fabrik v1.3 Font Specs
+     All letter-spacing: 0
+     -------------------------------------------------------------------------- */
+
+  /* Display — E+H Serif, Regular */
+  --text-display-lg:   57px;  --lh-display-lg:   64px;
+  --text-display-md:   45px;  --lh-display-md:   52px;
+  --text-display-sm:   36px;  --lh-display-sm:   44px;
+
+  /* Headline — E+H Serif, Regular */
+  --text-headline-lg:  32px;  --lh-headline-lg:  40px;
+  --text-headline-md:  28px;  --lh-headline-md:  36px;
+  --text-headline-sm:  24px;  --lh-headline-sm:  32px;
+
+  /* Title — E+H Sans, Regular */
+  --text-title-lg:     22px;  --lh-title-lg:     30px;
+  --text-title-md:     18px;  --lh-title-md:     28px;
+  --text-title-sm:     16px;  --lh-title-sm:     24px;
+
+  /* Body — E+H Sans, Light (300) */
+  --text-body-lg:      18px;  --lh-body-lg:      28px;
+  --text-body-md:      16px;  --lh-body-md:      24px;
+  --text-body-sm:      14px;  --lh-body-sm:      20px;
+
+  /* Label — E+H Sans, Regular */
+  --text-label-xl:     18px;  --lh-label-xl:     28px;
+  --text-label-lg:     16px;  --lh-label-lg:     24px;
+  --text-label-md:     14px;  --lh-label-md:     20px;
+  --text-label-sm:     12px;  --lh-label-sm:     16px;
+
+
+  /* --------------------------------------------------------------------------
+     Shadows / elevation
+     Source: Fabrik v1.3 shadow specs
+     Shadow color: --color-shadow = cyan/20 = #193345
+     -------------------------------------------------------------------------- */
+
+  --shadow-none:    none;
+  --shadow-fly:     0 2px 8px -1px rgba(25, 51, 69, 0.20);    /* elevation-fly */
+  --shadow-spider:  0 4px 16px -2px rgba(25, 51, 69, 0.22);   /* elevation-spider */
+  --shadow-bat:     0 8px 24px -4px rgba(25, 51, 69, 0.24);   /* elevation-bat */
+  --shadow-rabbit:  0 16px 40px -8px rgba(25, 51, 69, 0.26);  /* elevation-rabbit */
+  --shadow-dog:     0 24px 60px -12px rgba(25, 51, 69, 0.28); /* elevation-dog */
+  --shadow-horse:   0 32px 96px -16px rgba(25, 51, 69, 0.30); /* elevation-horse */
+
+  /* Focus ring — double ring: white inner + magenta/50 outer */
+  --shadow-focus:   0 0 0 4px var(--white), 0 0 0 8px var(--magenta-50);
+
+
+  /* --------------------------------------------------------------------------
+     Breakpoints (reference — use in media queries)
+     xs: 0–479px   sm: 480px   md: 768px   lg: 1024px   xl: 1440px
+     -------------------------------------------------------------------------- */
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Responsive semantic tokens
+   These tokens are defined per breakpoint because their values scale with
+   layout. Define them outside :root so the @media rules can override.
+   -------------------------------------------------------------------------- */
+
+/* --section-spacing: standard top (and bottom) padding for full-width
+   page sections / blocks (Hero Stage, spd-search, content bands, etc.).
+   Scales with the layout grid — wider viewports get more breathing room.
+   Source: 01 Semantic / layout/section-spacing */
+:root                          { --section-spacing: 16px; } /* xs / sm */
+@media (min-width: 768px)  { :root { --section-spacing: 24px; } } /* md */
+@media (min-width: 1024px) { :root { --section-spacing: 30px; } } /* lg */
+@media (min-width: 1440px) { :root { --section-spacing: 40px; } } /* xl */
+
+/* --layout-margin: page/section outer margin, scales with the layout grid.
+   Source: 02 Breakpoints / layout/margins */
+:root                          { --layout-margin: 16px; } /* xs */
+@media (min-width: 480px)  { :root { --layout-margin: 32px; } } /* s */
+@media (min-width: 768px)  { :root { --layout-margin: 48px; } } /* m */
+@media (min-width: 1024px) { :root { --layout-margin: 60px; } } /* l */
+@media (min-width: 1440px) { :root { --layout-margin: 80px; } } /* xl */
+
+/* --layout-gutter: grid column gutter.
+   Source: 02 Breakpoints / layout/gutter */
+:root                          { --layout-gutter: 16px; } /* xs / s */
+@media (min-width: 768px)  { :root { --layout-gutter: 20px; } } /* m */
+@media (min-width: 1024px) { :root { --layout-gutter: 24px; } } /* l */
+@media (min-width: 1440px) { :root { --layout-gutter: 28px; } } /* xl */
+
+/* --layout-card-spacing: internal x/y padding for card-like surfaces.
+   Source: 02 Breakpoints / layout/spacing-card-xy */
+:root                          { --layout-card-spacing: 16px; } /* xs / s / m */
+@media (min-width: 1024px) { :root { --layout-card-spacing: 24px; } } /* l / xl */
+@media (min-width: 2560px) { :root { --layout-card-spacing: 32px; } } /* 2xl */
+
+/* --layout-body-max-width: content max width within the page margins.
+   Figma layout/body-max-width at XL and 2XL (below XL the body width is
+   the viewport minus the margins). */
+:root { --layout-body-max-width: 1280px; }
+
+/* --header-nav-height: height of the header's main nav row (row 2) — a
+   Fabrik header dimension shared by header and anchor-navigation. Constant
+   64px at every breakpoint. */
+:root { --header-nav-height: 64px; }
+
+/* --header-meta-height: height of the header's top meta row (row 1) — a
+   Fabrik header dimension shared by header and anchor-navigation. 64px by
+   default, 54px from lg (1024px) up. */
+:root                          { --header-meta-height: 64px; } /* xs / sm / md */
+@media (min-width: 1024px) { :root { --header-meta-height: 54px; } } /* lg / xl */
+
+/* --------------------------------------------------------------------------
+   Responsive Text Styles
+   Source: responsive text variables
+   Breakpoint-responsive heading sizes. Always used exclusively with
+   E+H Serif Regular: font-family: var(--font-serif); font-weight: var(--font-regular);
+   Use font-size and line-height together — values update automatically per viewport width.
+   -------------------------------------------------------------------------- */
+
+/* H1: XS/SM/MD=36px/44lh · LG/XL+=45px/52lh */
+:root                          { --responsive-font-size-h1: 36px; --responsive-line-height-h1: 44px; }
+@media (min-width: 1024px) { :root { --responsive-font-size-h1: 45px; --responsive-line-height-h1: 52px; } }
+
+/* H2: XS/SM=28px/36lh · MD=32px/40lh · LG/XL+=36px/44lh */
+:root                          { --responsive-font-size-h2: 28px; --responsive-line-height-h2: 36px; }
+@media (min-width: 768px)  { :root { --responsive-font-size-h2: 32px; --responsive-line-height-h2: 40px; } }
+@media (min-width: 1024px) { :root { --responsive-font-size-h2: 36px; --responsive-line-height-h2: 44px; } }
+
+/* H3: XS/SM=24px/32lh · MD=28px/36lh · LG/XL+=32px/40lh */
+:root                          { --responsive-font-size-h3: 24px; --responsive-line-height-h3: 32px; }
+@media (min-width: 768px)  { :root { --responsive-font-size-h3: 28px; --responsive-line-height-h3: 36px; } }
+@media (min-width: 1024px) { :root { --responsive-font-size-h3: 32px; --responsive-line-height-h3: 40px; } }
+
+
+
+/* --------------------------------------------------------------------------
+   Base reset & defaults
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md);
+  line-height: var(--lh-body-md);
+  font-weight: var(--font-light);   /* Body uses Light (300) per Fabrik spec */
+  color: var(--color-on-surface);
+  background-color: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus ring utility — apply to any interactive element.
+   Outline (not box-shadow) so the ring's corner radius always matches the
+   element's own border-radius exactly, at any element size. */
+.focus-ring:focus-visible {
+  outline:        var(--focus-ring-width) solid var(--color-stroke-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* --------------------------------------------------------------------------
+   LEGACY (Figma variables prefixed *)
+   These tokens mirror deprecated Figma variables, kept only because specific
+   components are still bound to them. Use a --space-legacy-* token ONLY in
+   components Figma still binds to it, never for new work — delete it once
+   Figma removes the variable.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --space-legacy-bat: 20px;  /* Figma spacing/*bat — still bound in Anchor
+                                 Navigation, Tabs and the Industrial UI Frame
+                                 filter button. */
+  --space-legacy-cat: 40px;  /* Figma spacing/*cat, legacy variable, still bound in
+                                 Compact Teaser (the constant gap between the
+                                 headline and the grid); use only there, never
+                                 for new work. */
+}
+
+/* Figma legacy variable coverage:
+   *bee     10px  -> --input-spacing-y
+   *bat     20px  -> --space-legacy-bat
+   *cat     40px  -> --space-legacy-cat (Compact Teaser container gap)
+   *pigeon  28px  -> covered by --layout-gutter at XL (no separate token)
+   *bear    60px  -> covered by --layout-margin at L (no separate token)
+   *ladybug  6px  -> not used in code
+   *bison  104px  -> not used in code
+   *hippo  128px  -> not used in code
+   Add a --space-legacy-* token first if a component needs one of the
+   "not used in code" variables above. */

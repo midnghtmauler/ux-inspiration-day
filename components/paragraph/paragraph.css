@@ -1,0 +1,80 @@
+/* =============================================================================
+   Paragraph — Fabrik v1.3
+   Requires: ../../tokens.css
+
+   Breakpoint-agnostic — body text size never changes across breakpoints.
+   Designed to be nested inside a future Paragraph Group component.
+
+   - .paragraph-list--bullet    List Style=Bullet    — unordered list
+   - .paragraph-list--numbered  List Style=Numbered  — ordered list
+   (No modifier = List Style=None, plain body copy)
+
+   HTML STRUCTURE — no list
+   <div class="paragraph">
+     <p class="paragraph-title">Paragraph Title</p>
+     <p class="paragraph-text">Lorem ipsum…</p>
+   </div>
+
+   HTML STRUCTURE — bullet list
+   <div class="paragraph">
+     <p class="paragraph-title">Paragraph Title</p>
+     <ul class="paragraph-list paragraph-list--bullet">
+       <li>Lorem ipsum…</li>
+       <li>Mauris tempus…</li>
+     </ul>
+   </div>
+
+   HTML STRUCTURE — numbered list
+   <div class="paragraph">
+     <p class="paragraph-title">Paragraph Title</p>
+     <ol class="paragraph-list paragraph-list--numbered">
+       <li>Lorem ipsum…</li>
+       <li>Mauris tempus…</li>
+     </ol>
+   </div>
+   ============================================================================= */
+
+.paragraph {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     flex-start;
+  width:           100%;
+}
+
+.paragraph-title {
+  width:       100%;
+  margin:      0;
+  font-family: var(--font-sans);
+  font-size:   var(--text-title-md);
+  line-height: var(--lh-title-md);
+  font-weight: var(--font-bold);
+  color:       var(--color-on-surface);
+}
+
+.paragraph-text {
+  width:       100%;
+  margin:      0;
+  font-family: var(--font-sans);
+  font-size:   var(--text-body-lg);
+  line-height: var(--lh-body-lg);
+  font-weight: var(--font-light);
+  color:       var(--color-on-surface);
+}
+
+.paragraph-list {
+  width:       100%;
+  margin:      0;
+  padding-left: 27px;
+  font-family: var(--font-sans);
+  font-size:   var(--text-body-lg);
+  line-height: var(--lh-body-lg);
+  font-weight: var(--font-light);
+  color:       var(--color-on-surface);
+}
+
+.paragraph-list--bullet   { list-style-type: disc; }
+.paragraph-list--numbered { list-style-type: decimal; }
+
+.paragraph-list li {
+  margin: 0;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+  UX Team Inspiration Day — "Beyond the Interface" companion app (prototype).
+  No Figma source: invented mobile app patterns (full-screen launch, app bar
+  with back chevron, bottom tab bar, timeline rows, stepped mission flow,
+  bottom-sheet note capture) — no Fabrik block covers app chrome. Fabrik
+  Button, Tag, Paragraph lists and Hyperlink are used verbatim; capture
+  fields are token-based app-sized inputs, not the website form components.
+  Pages are white article surfaces; tint lives on the navigation chrome and
+  on elements that need emphasis. Exhibition tasks capture in-app; the
+  workshop is browse-only (captured physically in the workroom).
+  Content lives in content.js (single source of truth, structured from the
+  three adjacent Markdown documents). Views render from it via app.js.
+  Work log is stored on-device (localStorage); export via Markdown or JSON.
+  Offline via sw.js (network-first, precache fallback) when served over HTTP.
+  Serve through a local server (Live Server), e.g.:
+  http://127.0.0.1:8765/explorations/pages/ux-inspiration-day/index.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Beyond the Interface — UX Team Inspiration Day</title>
+  <meta name="theme-color" content="#A8005C">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./components/button/button.css">
+  <link rel="stylesheet" href="./components/tag/tag.css">
+  <link rel="stylesheet" href="./components/paragraph/paragraph.css">
+  <link rel="stylesheet" href="./components/hyperlink/hyperlink.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="./utilities/fabrik-dropdown.js" defer></script>
+  <script src="icons.js"></script>
+  <script src="content.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="app-bar" id="app-bar"></header>
+  <main class="view" id="view" aria-live="polite"></main>
+  <footer class="tab-bar" id="tab-bar"></footer>
+</body>
+</html>

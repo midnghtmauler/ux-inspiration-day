@@ -1,0 +1,176 @@
+/* =============================================================================
+   Tag — Fabrik v1.3
+   Requires: ../../tokens.css
+
+   Compact labeling/status badge. Five semantic types × filled/outlined style.
+   Filled tags can additionally be interactive (clickable, e.g. navigation).
+
+   States (interactive only): Default · Hover · Pressed · Focused (keyboard)
+
+   HTML STRUCTURE — static
+   <span class="tag tag-neutral">Label</span>
+   <span class="tag tag-info tag--outlined">Label</span>
+
+   HTML STRUCTURE — interactive (filled only)
+   <button type="button" class="tag tag-info tag--interactive">
+     <span class="tag__icon" aria-hidden="true"><!-- inline eh-info.16x16.svg --></span>
+     Label
+   </button>
+   ============================================================================= */
+
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+.tag {
+  display:          inline-flex;
+  align-items:      center;
+  gap:              var(--space-xs);
+  padding:          var(--space-xxs) var(--space-s);
+  border-radius:    var(--radius-round);
+  border:           none;
+  background:       none;
+  font-family:      var(--font-sans);
+  font-size:        var(--text-label-md);
+  line-height:      var(--lh-label-md);
+  font-weight:      var(--font-regular);
+  color:            var(--color-on-surface);
+  white-space:      nowrap;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tag__icon {
+  display:     inline-flex;
+  flex-shrink: 0;
+  width:       16px;
+  height:      16px;
+}
+
+.tag__icon svg {
+  display: block;
+  width:   16px;
+  height:  16px;
+  fill:    currentColor;
+}
+
+
+/* --------------------------------------------------------------------------
+   Type — filled (default)
+   -------------------------------------------------------------------------- */
+
+.tag-neutral { background-color: var(--color-tonal-enabled); }
+.tag-info    { background-color: var(--color-surface-info); }
+.tag-success { background-color: var(--color-surface-success); }
+.tag-warning { background-color: var(--color-surface-warning); }
+.tag-error   { background-color: var(--color-surface-error); }
+
+
+/* --------------------------------------------------------------------------
+   Type — outlined (static only, no interactive states in Figma)
+   -------------------------------------------------------------------------- */
+
+.tag--outlined {
+  background-color: transparent;
+  border:           var(--stroke-thin) solid;
+}
+
+.tag--outlined.tag-neutral { border-color: var(--color-stroke-medium); }
+.tag--outlined.tag-info    { border-color: var(--color-stroke-info); }
+.tag--outlined.tag-success { border-color: var(--color-stroke-success); }
+.tag--outlined.tag-warning { border-color: var(--color-stroke-warning); }
+.tag--outlined.tag-error   { border-color: var(--color-stroke-negative); }
+
+
+/* --------------------------------------------------------------------------
+   Interactive (filled only) — clickable tags, e.g. navigation
+   -------------------------------------------------------------------------- */
+
+.tag--interactive {
+  cursor:                  pointer;
+  text-decoration-line:    underline;
+  text-decoration-style:   solid;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+/* The transition lives only on interaction states so that the element does not animate from its
+   initial style on page load (visible flash in Safari); leaving these states is instant. */
+.tag--interactive.tag-neutral:hover,
+.tag--interactive.tag-neutral.is-hovered,
+.tag--interactive.tag-info:hover,
+.tag--interactive.tag-info.is-hovered,
+.tag--interactive.tag-success:hover,
+.tag--interactive.tag-success.is-hovered,
+.tag--interactive.tag-warning:hover,
+.tag--interactive.tag-warning.is-hovered,
+.tag--interactive.tag-error:hover,
+.tag--interactive.tag-error.is-hovered,
+.tag--interactive.tag-neutral:active,
+.tag--interactive.tag-neutral.is-pressed,
+.tag--interactive.tag-info:active,
+.tag--interactive.tag-info.is-pressed,
+.tag--interactive.tag-success:active,
+.tag--interactive.tag-success.is-pressed,
+.tag--interactive.tag-warning:active,
+.tag--interactive.tag-warning.is-pressed,
+.tag--interactive.tag-error:active,
+.tag--interactive.tag-error.is-pressed,
+.tag--interactive.tag-neutral:focus-visible,
+.tag--interactive.tag-neutral.is-focused,
+.tag--interactive.tag-info:focus-visible,
+.tag--interactive.tag-info.is-focused,
+.tag--interactive.tag-success:focus-visible,
+.tag--interactive.tag-success.is-focused,
+.tag--interactive.tag-warning:focus-visible,
+.tag--interactive.tag-warning.is-focused,
+.tag--interactive.tag-error:focus-visible,
+.tag--interactive.tag-error.is-focused {
+  transition:              background-color 0.15s ease;
+}
+
+.tag--interactive.tag-neutral:hover,
+.tag--interactive.tag-neutral.is-hovered { background-color: var(--color-tonal-hover); }
+.tag--interactive.tag-info:hover,
+.tag--interactive.tag-info.is-hovered    { background-color: var(--color-info-hover); }
+.tag--interactive.tag-success:hover,
+.tag--interactive.tag-success.is-hovered { background-color: var(--color-success-hover); }
+.tag--interactive.tag-warning:hover,
+.tag--interactive.tag-warning.is-hovered { background-color: var(--color-warning-hover); }
+.tag--interactive.tag-error:hover,
+.tag--interactive.tag-error.is-hovered   { background-color: var(--color-error-hover); }
+
+.tag--interactive.tag-neutral:active,
+.tag--interactive.tag-neutral.is-pressed { background-color: var(--color-tonal-pressed); }
+.tag--interactive.tag-info:active,
+.tag--interactive.tag-info.is-pressed    { background-color: var(--color-info-pressed); }
+.tag--interactive.tag-success:active,
+.tag--interactive.tag-success.is-pressed { background-color: var(--color-success-pressed); }
+.tag--interactive.tag-warning:active,
+.tag--interactive.tag-warning.is-pressed { background-color: var(--color-warning-pressed); }
+.tag--interactive.tag-error:active,
+.tag--interactive.tag-error.is-pressed   { background-color: var(--color-error-pressed); }
+
+/* Keyboard focus only */
+.tag--interactive:focus-visible,
+.tag--interactive.is-focused {
+  outline:        var(--focus-ring-width) solid var(--color-stroke-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.tag--interactive.tag-neutral:focus-visible,
+.tag--interactive.tag-neutral.is-focused { background-color: var(--color-tonal-hover); }
+.tag--interactive.tag-info:focus-visible,
+.tag--interactive.tag-info.is-focused    { background-color: var(--color-info-hover); }
+.tag--interactive.tag-success:focus-visible,
+.tag--interactive.tag-success.is-focused { background-color: var(--color-success-hover); }
+.tag--interactive.tag-warning:focus-visible,
+.tag--interactive.tag-warning.is-focused { background-color: var(--color-warning-hover); }
+.tag--interactive.tag-error:focus-visible,
+.tag--interactive.tag-error.is-focused   { background-color: var(--color-error-hover); }
+
+
+/* --------------------------------------------------------------------------
+   Responsive — not applicable
+   Single fixed size. No breakpoint variations.
+   -------------------------------------------------------------------------- */
