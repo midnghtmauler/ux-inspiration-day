@@ -817,13 +817,16 @@
     var prevLabel = i > 0 ? stepName(items[i - 1]) : 'Overview';
     var nextHref = i < items.length - 1 ? '#/segment/' + s.id + '/step/' + (i + 1) : '#/segment/' + s.id;
     var last = i === items.length - 1;
+    /* Step navigation follows the configurator side-sheet CTA pairing:
+       quiet plain action on the left, filled primary action on the right,
+       arrows integrated as button icons. */
     html += '<section class="detail-hero step-actions">' +
-      '<a class="app-bar-back" href="' + prevHref + '">' + icon('arrow-left') + '<span>' + esc(prevLabel) + '</span></a>' +
+      '<a class="btn btn-secondary-plain btn-icon-left" href="' + prevHref + '">' + icon('arrow-left') + '<span class="btn-label">' + esc(prevLabel) + '</span><span class="btn-spinner"></span></a>' +
       (capture
         ? (entry
-          ? '<a class="btn btn-primary-filled" href="' + nextHref + '"><span class="btn-label">' + (last ? 'Finish' : 'Continue') + '</span><span class="btn-spinner"></span></a>'
-          : '<button type="button" class="btn btn-primary-filled" data-save-entry><span class="btn-label">' + (last ? 'Save and finish' : 'Save and continue') + '</span><span class="btn-spinner"></span></button>')
-        : '<a class="step-next" href="' + nextHref + '"><span>' + (last ? 'Done — overview' : esc(stepName(items[i + 1]))) + '</span>' + icon('arrow-right') + '</a>') +
+          ? '<a class="btn btn-primary-filled btn-icon-right" href="' + nextHref + '"><span class="btn-label">' + (last ? 'Finish' : 'Continue') + '</span>' + icon('arrow-right') + '<span class="btn-spinner"></span></a>'
+          : '<button type="button" class="btn btn-primary-filled btn-icon-right" data-save-entry><span class="btn-label">' + (last ? 'Save and finish' : 'Save and continue') + '</span>' + icon('arrow-right') + '<span class="btn-spinner"></span></button>')
+        : '<a class="btn btn-primary-filled btn-icon-right" href="' + nextHref + '"><span class="btn-label">' + (last ? 'Done — overview' : esc(stepName(items[i + 1]))) + '</span>' + icon('arrow-right') + '<span class="btn-spinner"></span></a>') +
       '</section>';
 
     view.innerHTML = html;

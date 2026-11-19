@@ -551,15 +551,19 @@ section.step-actions {
   padding-bottom: calc(160px + env(safe-area-inset-bottom));
 }
 
-.step-actions a { min-width: 0; }
+/* Labels ellipsise when space is tight: the plain back action shrinks
+   first, the filled forward action keeps its size. */
+.step-actions .btn { min-width: 0; }
 
-.step-actions a span {
+.step-actions .btn-secondary-plain { flex: 0 1 auto; }
+
+.step-actions .btn-primary-filled { flex: 0 0 auto; }
+
+.step-actions .btn .btn-label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.step-actions .btn { flex: 0 0 auto; }
 
 /* ---- Photo reminder (exhibitions) ------------------------------------------- */
 
@@ -590,21 +594,6 @@ section.step-actions {
 }
 
 .photo-taken { display: inline-flex; align-items: center; gap: var(--space-xxs); }
-
-.step-next {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xxs);
-  min-height: 44px;
-  padding: 0 var(--space-xs) 0 var(--space-s);
-  border-radius: var(--radius-default);
-  color: var(--color-primary);
-  font-size: var(--text-body-lg);
-  font-weight: var(--font-demi);
-  text-decoration: none;
-}
-
-.step-next:active { background: var(--color-outlined-primary-hover); }
 
 /* ---- Quiet "add a note" link ----------------------------------------------------------- */
 
