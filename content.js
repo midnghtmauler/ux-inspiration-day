@@ -261,11 +261,11 @@ const SEGMENTS = [
         start: '14:00',
         end: '14:15',
         title: 'Inspiration harvest',
-        goal: 'A shared wall of principles from the morning.',
+        goal: 'A shared wall of inspiration from the morning.',
         steps: [
           'On your own, review your log and photos from the two exhibitions.',
-          'Write each observation or principle on a post-it and add it to the wall.',
-          'Group similar observations together — no discussion yet; the wall is the reference for the rest of the afternoon.',
+          'Write each observation, reference, or idea on a post-it and add it to the wall.',
+          'Group similar post-its together — no discussion yet; the wall is the reference for the rest of the afternoon.',
         ],
       },
       {
@@ -276,7 +276,7 @@ const SEGMENTS = [
         title: 'Challenge the interface',
         goal: 'One provocation per person — a customer journey, reframed AI-native.',
         steps: [
-          'On your own: pick one principle from the wall and one customer journey that fights it today — hard to navigate, heavy with complex information, or spread across pages and handoffs.',
+          'On your own: pick one post-it or cluster from the wall and one customer journey that fights it today — hard to navigate, heavy with complex information, or spread across pages and handoffs.',
           'Name the customer, the need, and the friction — a sentence each, not a framework.',
           'Reframe it: if we couldn’t use a conventional website, how would we solve this need? A sentence or a doodle is enough — what disappears when an agent does the work?',
         ],
@@ -294,7 +294,7 @@ const SEGMENTS = [
         goal: 'Six captured ideas, in one shared format.',
         steps: [
           'Each person or pair presents one idea — three minutes each.',
-          'Name the principle from the wall the idea draws on — the wall stays visible.',
+          'Name the post-it or cluster from the wall the idea draws on — the wall stays visible.',
           'Capture every idea in the same shape:',
         ],
         formula: CAPTURE_FORMULA,
