@@ -523,16 +523,15 @@ a.location-card:active .location-maps { background: var(--color-outlined-primary
 
 /* Prev/next (or save-and-continue) form a fixed bottom action bar on step
    screens: previous on the left, forward action on the right, always visible
-   while scrolling. It sits directly above the fixed tab bar (56px + safe
-   area) and below the capture sheet (z 30/31). `section.step-actions` must
-   out-specify `.view > section` (which sets column) and `.detail-hero`
-   (which sets padding). */
+   while scrolling. It sits directly above the fixed tab bar
+   (--app-tab-bar-h + safe area) and below the capture sheet (z 30/31).
+   `section.step-actions` must out-specify `.view > section` (which sets
+   column) and `.detail-hero` (which sets padding). */
 section.step-actions {
   position: fixed;
   left: 0;
   right: 0;
-  /* Tab-bar height 56px is app chrome, not a design-system token */
-  bottom: calc(56px + env(safe-area-inset-bottom));
+  bottom: calc(var(--app-tab-bar-h) + env(safe-area-inset-bottom));
   z-index: 9;
   display: flex;
   flex-direction: row;
@@ -910,13 +909,17 @@ section.step-actions {
 
 .tab-bar-inner { display: flex; }
 
+/* Tab-bar height is app chrome, not a design-system token; one variable so
+   the step-action bar can sit exactly on top of it. */
+:root { --app-tab-bar-h: 64px; }
+
 .tab {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-xxs);
-  min-height: 56px;
+  height: var(--app-tab-bar-h);
   padding: var(--space-s) var(--space-xs);
   text-decoration: none;
   color: var(--color-on-surface-inverse-variant);
