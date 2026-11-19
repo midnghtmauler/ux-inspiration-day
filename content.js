@@ -254,8 +254,6 @@ const SEGMENTS = [
       'Phones with the morning’s photos and notes',
       'Shared digital board or document for final capture',
     ],
-    autonomyNote:
-      'A simple vocabulary for autonomy: the AI can assist (inform and recommend), prepare (draft an action for approval), or act (complete a bounded task on its own). Use it to sharpen ideas, not to audit them.',
     phases: [
       {
         id: 'harvest',
@@ -263,13 +261,12 @@ const SEGMENTS = [
         start: '14:00',
         end: '14:15',
         title: 'Inspiration harvest',
-        prompts: [
-          'One observation from Avant-Garde — Graphic Design on the Rise',
-          'One observation from Sabine Marcelis — Light and Color',
-          'One principle that could strengthen a digital customer experience',
+        goal: 'A shared wall of principles from the morning.',
+        steps: [
+          'On your own, review your log and photos from the two exhibitions.',
+          'Write each observation or principle on a post-it and add it to the wall.',
+          'Group similar observations together — no discussion yet; the wall is the reference for the rest of the afternoon.',
         ],
-        note: 'Similar observations are loosely grouped on the wall — no discussion yet; the wall is ambient reference for the rest of the afternoon.',
-        output: 'A shared wall of principles.',
       },
       {
         id: 'challenge',
@@ -277,13 +274,16 @@ const SEGMENTS = [
         start: '14:15',
         end: '14:45',
         title: 'Challenge the interface',
-        provocation: 'If we couldn’t use a conventional website, how would we solve this customer need?',
+        goal: 'Two or three customer journeys, reframed as provocations.',
+        steps: [
+          'Pick one principle or cluster from the wall that excites you.',
+          'Choose a journey that fights it today — hard to navigate, heavy with complex information, or spread across pages and handoffs. Name the customer, the need, and the friction — a sentence each, not a framework.',
+          'Reframe it as a provocation: if we couldn’t use a conventional website, how would we solve this need?',
+        ],
         thinkRather: {
           think: 'conversation → agent → recommendation → action → automation',
           rather: 'navigation → page → content → form',
         },
-        note: 'Choose journeys that are hard to navigate today, heavy with complex information, or spread across several pages and handoffs. Name the customer, the need, and the friction — in a sentence each, not a framework.',
-        output: 'Two or three journeys, reframed as provocations.',
       },
       {
         id: 'ai-native',
@@ -291,12 +291,12 @@ const SEGMENTS = [
         start: '14:45',
         end: '15:25',
         title: 'AI-native experience',
-        prompts: [
-          'What parts of our customer journeys could disappear entirely with agents?',
-          'Where should AI assist the user, and where should it act autonomously?',
-          'If endress.com were designed AI-first rather than page-first, what would we change?',
+        goal: 'Rough ideas, sketched in words or pictures.',
+        steps: [
+          'Take one provocation from the last round — yours or someone else’s.',
+          'Sketch it AI-first: what parts of the journey disappear entirely with agents?',
+          'Mark where the AI assists (inform and recommend), prepares (draft an action for approval), or acts (complete a bounded task on its own) — to sharpen the idea, not to audit it.',
         ],
-        output: 'Rough ideas, sketched in words or pictures.',
       },
       {
         id: 'sharing',
@@ -304,9 +304,13 @@ const SEGMENTS = [
         start: '15:25',
         end: '15:50',
         title: 'Concept sharing',
-        note: 'Each person or pair presents one idea, three minutes each. Name the principle an idea draws on when it does — the wall stays visible.',
+        goal: 'Six captured ideas, in one shared format.',
+        steps: [
+          'Each person or pair presents one idea — three minutes each.',
+          'Name the principle from the wall the idea draws on — the wall stays visible.',
+          'Capture every idea in the same shape:',
+        ],
         formula: CAPTURE_FORMULA,
-        output: 'Six captured ideas, in one shared format.',
       },
       {
         id: 'close',
@@ -314,9 +318,12 @@ const SEGMENTS = [
         start: '15:50',
         end: '16:00',
         title: 'Close',
-        provocation: 'One idea we should experiment with in 2027.',
-        note: 'No ratings, no business cases. Ideas may converge or diverge — both are fine. Agree only on who writes the ideas up and where they live.',
-        output: 'Six tangible ideas for 2027, one owner for the write-up.',
+        goal: 'Six tangible ideas for 2027 — and one owner for the write-up.',
+        steps: [
+          'Each person nominates one idea we should experiment with in 2027.',
+          'No ratings, no business cases — ideas may converge or diverge, both are fine.',
+          'Agree who writes the ideas up and where they live.',
+        ],
       },
     ],
   },

@@ -6,7 +6,7 @@
   the HTTP cache, so a new version guarantees fresh copies on every client.
 */
 
-var CACHE = 'uxday-v30';
+var CACHE = 'uxday-v31';
 
 var APP_FILES = [
   './',

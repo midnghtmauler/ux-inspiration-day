@@ -425,15 +425,6 @@ a.location-card:active .location-maps { background: var(--color-outlined-primary
 
 .phase-title { font-size: var(--text-title-sm); line-height: var(--lh-title-sm); font-weight: var(--font-demi); }
 
-.phase-provocation {
-  margin: 0;
-  padding: var(--space-sm) var(--space-m);
-  border-left: var(--stroke-thick) solid var(--color-primary);
-  font-size: var(--text-body-lg);
-  line-height: var(--lh-body-lg);
-  font-weight: var(--font-light);
-}
-
 .formula {
   font-size: var(--text-body-md);
   line-height: var(--lh-body-md);
@@ -442,9 +433,6 @@ a.location-card:active .location-maps { background: var(--color-outlined-primary
   border-radius: var(--radius-default);
   padding: var(--space-sm) var(--space-m);
 }
-
-.phase-output { display: flex; align-items: flex-start; gap: var(--space-xs); margin: 0; }
-.phase-output .output-label { font-weight: var(--font-demi); }
 
 /* ---- Log entries ------------------------------------------------------------------ */
 

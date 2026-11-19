@@ -721,13 +721,6 @@
         '</ol></div></div></section>';
     }
 
-    /* Workshop: autonomy vocabulary as reference */
-    if (s.autonomyNote) {
-      html += '<div class="now-card" style="background:var(--color-surface-promo);color:var(--color-on-surface)">' +
-        '<div style="display:flex;align-items:flex-start;gap:var(--space-s)">' +
-        icon('info') + '<p class="small" style="margin:0">' + esc(s.autonomyNote) + '</p></div></div>';
-    }
-
     /* Loose-note capture: the single, quiet alternative (not in the workroom —
        the workshop is captured physically on sticky notes and the whiteboard;
        segments can opt out with allowNotes: false) */
@@ -767,14 +760,19 @@
     /* The story for this step */
     html += '<section><div class="group"><div class="group-inset" style="display:flex;flex-direction:column;gap:var(--space-m)">';
     if (isTask && d.hint) html += '<p style="margin:0">' + esc(d.hint) + '</p>';
-    if (!isTask && d.provocation) html += '<p class="phase-provocation" style="margin:0">' + esc(d.provocation) + '</p>';
+    /* Workshop phases: Goal first and prominent (same emphasis as the task
+       lens), then the numbered steps — same composition on every phase. */
+    if (!isTask && d.goal) {
+      html += '<p class="lens" style="margin:0">' + icon('star-outline', true) +
+        '<span><span class="output-label">Goal:</span> ' + esc(d.goal) + '</span></p>';
+    }
+    if (!isTask && d.steps) {
+      html += '<ol class="paragraph-list paragraph-list--numbered" style="margin:0">' +
+        d.steps.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol>';
+    }
     if (!isTask && d.thinkRather) {
       html += '<div class="formula">Think: ' + esc(d.thinkRather.think) + '</div>' +
         '<p class="small muted" style="margin:0">rather than: ' + esc(d.thinkRather.rather) + '</p>';
-    }
-    if (!isTask && d.prompts) {
-      html += '<ol class="paragraph-list paragraph-list--numbered" style="margin:0">' +
-        d.prompts.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol>';
     }
     if (!isTask && d.formula) html += '<div class="formula">' + esc(d.formula) + '</div>';
     if (!isTask && d.note) html += '<p class="small muted" style="margin:0">' + esc(d.note) + '</p>';
@@ -785,10 +783,6 @@
     if (isTask && d.keepInMind) {
       html += '<p class="lens" style="margin:0">' + icon('info', true) +
         '<span><span class="output-label">Keep in mind:</span> ' + esc(d.keepInMind) + '</span></p>';
-    }
-    if (!isTask && d.output) {
-      html += '<p class="small phase-output" style="margin:0">' + icon('star-outline', true) +
-        '<span><span class="output-label">Output:</span> ' + esc(d.output) + '</span></p>';
     }
     html += '</div></div></section>';
 
