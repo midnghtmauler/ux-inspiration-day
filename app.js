@@ -200,15 +200,16 @@
 
   function locationCard(loc) {
     if (!loc) return '';
-    return '<div class="group"><div class="location-card">' +
+    /* The whole card is the Maps link — not just the arrow */
+    return '<div class="group"><a class="location-card" href="' + loc.mapsUrl + '" target="_blank" rel="noopener" aria-label="Open ' + esc(loc.name) + ' in Maps">' +
       '<span class="location-icon">' + icon('location') + '</span>' +
       '<div class="location-main">' +
       '<div class="location-name">' + esc(loc.name) + '</div>' +
       '<div class="small muted">' + esc(loc.detail) + '</div>' +
       (loc.note ? '<div class="small muted">' + esc(loc.note) + '</div>' : '') +
       '</div>' +
-      '<a class="location-maps" href="' + loc.mapsUrl + '" target="_blank" rel="noopener" aria-label="Open ' + esc(loc.name) + ' in Maps">' + icon('arrow-right') + '</a>' +
-      '</div></div>';
+      '<span class="location-maps" aria-hidden="true">' + icon('arrow-right') + '</span>' +
+      '</a></div>';
   }
 
   function personPicker() {
@@ -460,6 +461,58 @@
     });
 
     sheet.querySelector('#sheet-text').focus();
+  }
+
+  /* ---- Remove confirmation ------------------------------------------------ */
+  /* Deleting a log entry is irreversible, so every Remove in the log confirms
+     first — same sheet/scrim overlay pattern as the capture composer. */
+
+  var confirmOpen = false;
+
+  function confirmRemove(id, trigger) {
+    if (confirmOpen) return;
+    var entry = state.entries.find(function (e) { return e.id === id; });
+    if (!entry) return;
+    confirmOpen = true;
+
+    var scrim = el('<div class="sheet-scrim"></div>');
+    var sheet = el(
+      '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="confirm-title">' +
+      '<div class="sheet-grab" aria-hidden="true"></div>' +
+      '<div class="sheet-head">' +
+      '<h2 class="sheet-title" id="confirm-title">Remove this entry?</h2>' +
+      '<button type="button" class="app-bar-back" id="confirm-close" aria-label="Cancel">Close</button>' +
+      '</div>' +
+      '<p class="confirm-preview small">' + esc(entry.text) + '</p>' +
+      '<div class="sheet-actions">' +
+      '<button type="button" class="btn btn-primary-filled" id="confirm-remove"><span class="btn-label">Remove</span><span class="btn-spinner"></span></button>' +
+      '<button type="button" class="btn btn-secondary-plain" id="confirm-keep"><span class="btn-label">Keep entry</span><span class="btn-spinner"></span></button>' +
+      '</div></div>'
+    );
+
+    document.body.appendChild(scrim);
+    document.body.appendChild(sheet);
+
+    function close(refocus) {
+      confirmOpen = false;
+      scrim.remove();
+      sheet.remove();
+      if (refocus && trigger) trigger.focus();
+    }
+
+    scrim.addEventListener('click', function () { close(true); });
+    sheet.querySelector('#confirm-close').addEventListener('click', function () { close(true); });
+    sheet.querySelector('#confirm-keep').addEventListener('click', function () { close(true); });
+    document.addEventListener('keydown', function onEsc(e) {
+      if (e.key === 'Escape') { close(true); document.removeEventListener('keydown', onEsc); }
+    });
+    sheet.querySelector('#confirm-remove').addEventListener('click', function () {
+      removeEntry(id);
+      close(false);
+      render();
+    });
+
+    sheet.querySelector('#confirm-keep').focus();
   }
 
   /* ---- View: Agenda ------------------------------------------------------ */
@@ -887,8 +940,7 @@
 
     view.querySelectorAll('[data-remove]').forEach(function (b) {
       b.addEventListener('click', function () {
-        removeEntry(b.getAttribute('data-remove'));
-        render();
+        confirmRemove(b.getAttribute('data-remove'), b);
       });
     });
 

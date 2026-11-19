@@ -360,7 +360,10 @@ button { font-family: inherit; }
   text-decoration: none;
 }
 
-.location-maps:active { background: var(--color-outlined-primary-hover); }
+/* Whole card is the Maps link: undo link styling, keep press feedback on the arrow */
+a.location-card { text-decoration: none; color: inherit; }
+
+a.location-card:active .location-maps { background: var(--color-outlined-primary-hover); }
 
 /* ---- Task cards (exhibitions) -------------------------------------------------- */
 
@@ -749,6 +752,14 @@ section.step-actions {
 
 .sheet-actions { display: flex; flex-direction: column; gap: var(--space-s); }
 .sheet-actions .btn { justify-content: center; }
+
+/* Remove confirmation: preview of the entry about to be deleted */
+.confirm-preview {
+  margin: 0;
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-tonal-enabled);
+  border-radius: var(--radius-default);
+}
 
 /* ---- Full-screen launch (welcome) ------------------------------------------------------ */
 
