@@ -295,7 +295,6 @@ const SEGMENTS = [
         steps: [
           'Each person or pair presents one idea — three minutes each.',
           'Name the post-it or cluster from the wall the idea draws on.',
-          'Capture every idea in the same shape:',
         ],
         formula: CAPTURE_FORMULA,
       },

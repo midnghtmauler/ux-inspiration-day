@@ -774,7 +774,7 @@
       html += '<div class="formula">Think: ' + esc(d.thinkRather.think) + '</div>' +
         '<p class="small muted" style="margin:0">rather than: ' + esc(d.thinkRather.rather) + '</p>';
     }
-    if (!isTask && d.formula) html += '<div class="formula">' + esc(d.formula) + '</div>';
+    if (!isTask && d.formula) html += '<div class="formula"><span class="formula-label">The shared shape — capture each idea as</span>' + esc(d.formula) + '</div>';
     if (!isTask && d.note) html += '<p class="small muted" style="margin:0">' + esc(d.note) + '</p>';
     if (isTask && d.lens) {
       html += '<p class="lens" style="margin:0">' + icon('star-outline', true) +

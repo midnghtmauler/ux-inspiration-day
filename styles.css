@@ -434,6 +434,17 @@ a.location-card:active .location-maps { background: var(--color-outlined-primary
   padding: var(--space-sm) var(--space-m);
 }
 
+.formula-label {
+  display: block;
+  margin-bottom: var(--space-xxs);
+  font-size: var(--text-label-sm);
+  line-height: var(--lh-label-sm);
+  font-weight: var(--font-demi);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+}
+
 /* ---- Log entries ------------------------------------------------------------------ */
 
 .entry { padding: var(--space-m); display: flex; flex-direction: column; gap: var(--space-xs); }
