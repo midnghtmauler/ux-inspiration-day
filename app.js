@@ -984,6 +984,16 @@
       icon('export') + '<span class="btn-label">Export as JSON</span><span class="btn-spinner"></span></button>' +
       '</div></div></section>';
 
+    /* Account: log out / switch user. Entries are nameless and stay on the
+       device — logging out only re-opens the avatar picker. */
+    if (state.name) {
+      html += '<section aria-label="Account"><h2 class="section-label">Logged in as ' + esc(state.name) + '</h2>' +
+        '<div class="group"><div class="group-inset" style="display:flex;flex-direction:column;gap:var(--space-m)">' +
+        '<p class="small muted" style="margin:0">Picked the wrong avatar? Log out and choose again — your entries stay on this device.</p>' +
+        '<button type="button" class="btn btn-secondary-outline" data-action="logout"><span class="btn-label">Log out</span><span class="btn-spinner"></span></button>' +
+        '</div></div></section>';
+    }
+
     /* Day goals reference */
     html += '<section aria-label="Day goals"><h2 class="section-label">Goal for the day</h2>' +
       '<div class="group"><div class="group-inset"><ul class="paragraph-list paragraph-list--bullet" style="margin:0">' +
@@ -996,6 +1006,13 @@
     if (mdBtn) mdBtn.addEventListener('click', exportMarkdown);
     var jsonBtn = view.querySelector('[data-action="export-json"]');
     if (jsonBtn) jsonBtn.addEventListener('click', exportJson);
+
+    var logoutBtn = view.querySelector('[data-action="logout"]');
+    if (logoutBtn) logoutBtn.addEventListener('click', function () {
+      state.name = '';
+      save();
+      render();
+    });
 
     wirePersonPicker(view);
   }
