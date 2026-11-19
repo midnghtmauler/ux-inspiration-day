@@ -235,8 +235,8 @@ const SEGMENTS = [
   {
     id: 'workshop',
     start: '14:00',
-    end: '16:00',
-    timeLabel: '14:00–16:00',
+    end: '15:30',
+    timeLabel: '14:00–15:30',
     title: 'Workshop: Designing Beyond the Interface',
     type: 'workshop',
     typeLabel: 'Workshop',
@@ -244,7 +244,7 @@ const SEGMENTS = [
       name: 'Impact Hub Zürich, Viadukt',
       detail: 'Geroldstrasse 33, 8005 Zürich, Meeting Room V2',
       mapsUrl: 'https://maps.google.com/?q=Impact+Hub+Z%C3%BCrich+Viadukt',
-      note: 'Room is booked 14:00–16:00.',
+      note: 'Room is booked 14:00–16:00 — we aim to finish by 15:30 and keep the last half hour loose.',
     },
     focus:
       'Use the morning’s inspiration to rethink Endress+Hauser customer journeys without defaulting to pages, navigation, and forms — and leave with six tangible ideas, one per person, rather than just inspiration.',
@@ -270,15 +270,15 @@ const SEGMENTS = [
       },
       {
         id: 'challenge',
-        timeLabel: '14:15–14:45',
+        timeLabel: '14:15–14:50',
         start: '14:15',
-        end: '14:45',
+        end: '14:50',
         title: 'Challenge the interface',
-        goal: 'Two or three customer journeys, reframed as provocations.',
+        goal: 'One provocation per person — a customer journey, reframed AI-native.',
         steps: [
-          'Pick one principle or cluster from the wall that excites you.',
-          'Choose a journey that fights it today — hard to navigate, heavy with complex information, or spread across pages and handoffs. Name the customer, the need, and the friction — a sentence each, not a framework.',
-          'Reframe it as a provocation: if we couldn’t use a conventional website, how would we solve this need?',
+          'On your own: pick one principle from the wall and one customer journey that fights it today — hard to navigate, heavy with complex information, or spread across pages and handoffs.',
+          'Name the customer, the need, and the friction — a sentence each, not a framework.',
+          'Reframe it: if we couldn’t use a conventional website, how would we solve this need? A sentence or a doodle is enough — what disappears when an agent does the work?',
         ],
         thinkRather: {
           think: 'conversation → agent → recommendation → action → automation',
@@ -286,23 +286,10 @@ const SEGMENTS = [
         },
       },
       {
-        id: 'ai-native',
-        timeLabel: '14:45–15:25',
-        start: '14:45',
-        end: '15:25',
-        title: 'AI-native experience',
-        goal: 'Rough ideas, sketched in words or pictures.',
-        steps: [
-          'Take one provocation from the last round — yours or someone else’s.',
-          'Sketch it AI-first: what parts of the journey disappear entirely with agents?',
-          'Mark where the AI assists (inform and recommend), prepares (draft an action for approval), or acts (complete a bounded task on its own) — to sharpen the idea, not to audit it.',
-        ],
-      },
-      {
         id: 'sharing',
-        timeLabel: '15:25–15:50',
-        start: '15:25',
-        end: '15:50',
+        timeLabel: '14:50–15:20',
+        start: '14:50',
+        end: '15:20',
         title: 'Concept sharing',
         goal: 'Six captured ideas, in one shared format.',
         steps: [
@@ -314,9 +301,9 @@ const SEGMENTS = [
       },
       {
         id: 'close',
-        timeLabel: '15:50–16:00',
-        start: '15:50',
-        end: '16:00',
+        timeLabel: '15:20–15:30',
+        start: '15:20',
+        end: '15:30',
         title: 'Close',
         goal: 'Six tangible ideas for 2027 — and one owner for the write-up.',
         steps: [
@@ -329,9 +316,9 @@ const SEGMENTS = [
   },
   {
     id: 'return',
-    start: '16:00',
+    start: '15:30',
     end: '23:59',
-    timeLabel: '16:00 onwards',
+    timeLabel: '15:30 onwards',
     title: 'Return journey',
     type: 'logistics',
     typeLabel: 'Journey home',
